@@ -13,6 +13,11 @@
   "author": "Rohit Sivakumar",
   "license": "UNLICENSED",
   "devDependencies": {
-    "prettier": "3.7.4"
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
+    "prettier": "3.7.4",
+    "lint": "eslint \"./src/**/*.js\""
+         
   }
 }
