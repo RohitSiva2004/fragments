@@ -8,6 +8,7 @@ This README explains how to set up, run, debug, and test the server.
 
 ## Requirements
 
+<<<<<<< HEAD
 - Node.js (LTS)
 - npm
 - Git
@@ -15,6 +16,15 @@ This README explains how to set up, run, debug, and test the server.
 - curl (or curl.exe on Windows)
 - jq (optional, for pretty-printing JSON)
 - WSL2 (for Windows users)
+=======
+* Node.js (LTS)
+* npm
+* Git
+* VS Code
+* curl (or curl.exe on Windows)
+* jq (optional, for pretty-printing JSON)
+* WSL2 (for Windows users)
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ---
 
@@ -60,21 +70,37 @@ fragments/
 └─ .env.debug
 ```
 
+<<<<<<< HEAD
 - `src/app.js` — Express app and routes
 - `src/server.js` — Server startup and graceful shutdown
 - `src/logger.js` — Pino logger configuration
 - `.vscode/` — VS Code debugging settings
 - `.env.debug` — Development environment variables
+=======
+* `src/app.js` — Express app and routes
+* `src/server.js` — Server startup and graceful shutdown
+* `src/logger.js` — Pino logger configuration
+* `.vscode/` — VS Code debugging settings
+* `.env.debug` — Development environment variables
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ---
 
 ## Scripts
 
+<<<<<<< HEAD
 - **start**: `npm start` — Start server normally on port 8080
 - **dev**: `npm run dev` — Start server in watch mode with debug logging
 - **debug**: `npm run debug` — Start server in watch mode with Node debugger (VS Code)
 - **lint**: `npm run lint` — Run ESLint to check for linting errors
 - **test**: `npm test` — Default test script (no tests yet)
+=======
+* **start**: `npm start` — Start server normally on port 8080
+* **dev**: `npm run dev` — Start server in watch mode with debug logging
+* **debug**: `npm run debug` — Start server in watch mode with Node debugger (VS Code)
+* **lint**: `npm run lint` — Run ESLint to check for linting errors
+* **test**: `npm test` — Default test script (no tests yet)
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ---
 
@@ -100,9 +126,15 @@ npm run dev
 npm run debug
 ```
 
+<<<<<<< HEAD
 - Open VS Code → Debug panel → select **"Debug via npm run debug"**
 - Set breakpoints in `src/app.js`
 - Access server via browser or curl to trigger breakpoints
+=======
+* Open VS Code → Debug panel → select **"Debug via npm run debug"**
+* Set breakpoints in `src/app.js`
+* Access server via browser or curl to trigger breakpoints
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ---
 
@@ -110,7 +142,11 @@ npm run debug
 
 ### Prettier
 
+<<<<<<< HEAD
 - Auto-formats code on save (configured in `.vscode/settings.json`)
+=======
+* Auto-formats code on save (configured in `.vscode/settings.json`)
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ### ESLint
 
@@ -124,8 +160,13 @@ npm run lint
 
 ## Health Check Route
 
+<<<<<<< HEAD
 - **URL:** `/`
 - **Method:** `GET`
+=======
+* **URL:** `/`
+* **Method:** `GET`
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 **Response:**
 
@@ -140,8 +181,13 @@ npm run lint
 }
 ```
 
+<<<<<<< HEAD
 - Cache-Control: `no-cache`
 - CORS enabled: `Access-Control-Allow-Origin: *`
+=======
+* Cache-Control: `no-cache`
+* CORS enabled: `Access-Control-Allow-Origin: *`
+>>>>>>> acaaf763449cf60a6e178dfea4036b143d695dbe
 
 ### Testing with curl and jq
 
