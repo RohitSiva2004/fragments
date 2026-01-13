@@ -11,6 +11,8 @@
     "url": "git+https://github.com/RohitSiva2004/fragments.git"
   },
   "author": "Rohit Sivakumar",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prettier": "3.7.4"
+  }
 }
-
