@@ -27,7 +27,7 @@ cd fragments
 
 2. Install dependencies:
 
-``bash
+```bash
 npm install
 
 
