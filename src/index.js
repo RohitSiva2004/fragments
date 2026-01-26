@@ -4,6 +4,8 @@ require('dotenv').config();
 
 const logger = require('./logger');
 
+const unused = 'test';
+
 process.on('uncaughtException', (err, origin) => {
   logger.fatal({ err, origin }, 'uncaughtException');
   throw err;
