@@ -2,7 +2,6 @@
 
 This is the back-end microservice for the **Fragments** project.
 It is built using **Node.js**, **Express**, and **Pino** for structured logging.
-This README explains how to set up, run, debug, and test the server.
 
 ---
 
@@ -17,6 +16,8 @@ This README explains how to set up, run, debug, and test the server.
 - jq (optional, for pretty-printing JSON)
 - WSL2 (for Windows users)
 
+=======
+
 * Node.js (LTS)
 * npm
 * Git
@@ -24,6 +25,9 @@ This README explains how to set up, run, debug, and test the server.
 * curl (or curl.exe on Windows)
 * jq (optional, for pretty-printing JSON)
 * WSL2 (for Windows users)
+
+
+=======
 
 
 ---
@@ -62,12 +66,19 @@ fragments/
 ├─ src/
 │  ├─ app.js
 │  ├─ server.js
-│  └─ logger.js
+│  ├─ logger.js
+│  ├─ auth.js
+│  ├─ index.js
+│  └─ routes/
+│     ├─ index.js
+│     └─ api/
+│        ├─ index.js
+│        └─ get.js
 ├─ package.json
 ├─ package-lock.json
 ├─ .prettierrc
 ├─ .prettierignore
-└─ .env.debug
+└─ .env
 ```
 
 
@@ -78,15 +89,26 @@ fragments/
 - `.env.debug` — Development environment variables
 =======
 * `src/app.js` — Express app and routes
+=======
+* `src/app.js` — Express app and middleware configuration
+
 * `src/server.js` — Server startup and graceful shutdown
 * `src/logger.js` — Pino logger configuration
+* `src/auth.js` — JWT authentication with AWS Cognito
+* `src/index.js` — Application entry point
+* `src/routes/` — API route handlers
 * `.vscode/` — VS Code debugging settings
+
 * `.env.debug` — Development environment variables
+
+=======
+* `.env` — Environment variables (not committed to git)
 
 
 ---
 
 ## Scripts
+
 
 - **start**: `npm start` — Start server normally on port 8080
 - **dev**: `npm run dev` — Start server in watch mode with debug logging
@@ -94,6 +116,8 @@ fragments/
 - **lint**: `npm run lint` — Run ESLint to check for linting errors
 - **test**: `npm test` — Default test script (no tests yet)
 =======
+=======
+
 * **start**: `npm start` — Start server normally on port 8080
 * **dev**: `npm run dev` — Start server in watch mode with debug logging
 * **debug**: `npm run debug` — Start server in watch mode with Node debugger (VS Code)
@@ -124,19 +148,22 @@ npm run dev
 npm run debug
 ```
 
+
 - Open VS Code → Debug panel → select **"Debug via npm run debug"**
 - Set breakpoints in `src/app.js`
 - Access server via browser or curl to trigger breakpoints
 =======
+=======
+
 * Open VS Code → Debug panel → select **"Debug via npm run debug"**
 * Set breakpoints in `src/app.js`
 * Access server via browser or curl to trigger breakpoints
 
 ---
 
-## Linting & Formatting
+## Environment Variables
 
-### Prettier
+Create a `.env` file in the root directory:
 
 - Auto-formats code on save (configured in `.vscode/settings.json`)
 =======
@@ -148,15 +175,27 @@ Run:
 
 ```bash
 npm run lint
+=======
+```env
+PORT=8080
+FRAGMENTS_LOG_LEVEL=debug
+AWS_COGNITO_POOL_ID=us-east-2_xxxxxxxxx
+AWS_COGNITO_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxx
+
 ```
 
 ---
 
-## Health Check Route
+## API Routes
+
+### Health Check
+
 
 - **URL:** `/`
 - **Method:** `GET`
 =======
+=======
+
 * **URL:** `/`
 * **Method:** `GET`
 
@@ -173,46 +212,57 @@ npm run lint
 }
 ```
 
+
 - Cache-Control: `no-cache`
 - CORS enabled: `Access-Control-Allow-Origin: *`
 =======
+=======
+
 * Cache-Control: `no-cache`
 * CORS enabled: `Access-Control-Allow-Origin: *`
 
-### Testing with curl and jq
+### Fragments API
 
-```bash
-curl localhost:8080
-curl -s localhost:8080 | jq
+* **URL:** `/v1/fragments`
+* **Method:** `GET`
+* **Authentication:** Required (Bearer token)
+
+**Response:**
+
+```json
+{
+  "status": "ok",
+  "fragments": []
+}
 ```
 
 ---
 
-## Debugging Steps
-
-1. Set a breakpoint in `src/app.js` at:
-
-```js
-res.status(200).json({
-```
-
-2. Start server in debug mode:
+## Testing with curl
 
 ```bash
-npm run debug
-```
-
-3. Open browser or run curl:
-
-```bash
+# Health check (public)
 curl localhost:8080
+
+# Fragments API (requires authentication)
+curl localhost:8080/v1/fragments
 ```
 
-4. VS Code will **pause at the breakpoint**. Inspect variables (`req`, `res`, `author`, etc.)
+---
 
-5. Press F5 to continue and let the JSON response return
+## Linting & Formatting
 
-> ⚠️ Note: While paused, the server will not send a response until you continue.
+### Prettier
+
+* Auto-formats code on save (configured in `.vscode/settings.json`)
+
+### ESLint
+
+Run:
+
+```bash
+npm run lint
+```
 
 ---
 
@@ -222,5 +272,5 @@ curl localhost:8080
 
 ---
 
-**Author:** Rohit Sivakumar
+**Author:** Rohit Sivakumar  
 **License:** UNLICENSED
